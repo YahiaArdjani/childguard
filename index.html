@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="ChildGuard prototype for demonstrating mock message safety analysis."
+    />
+    <title>ChildGuard | Message safety prototype</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="app-card" aria-labelledby="page-title">
+        <header class="brand">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img"><path d="M12 2.75 4.5 6v5.1c0 4.9 3.2 8.9 7.5 10.15 4.3-1.25 7.5-5.25 7.5-10.15V6L12 2.75Zm0 3.1 4.5 1.95v3.3c0 3.15-1.9 5.85-4.5 6.9-2.6-1.05-4.5-3.75-4.5-6.9V7.8L12 5.85Z" /></svg>
+          </div>
+          <div>
+            <p class="brand-name">ChildGuard</p>
+            <p class="tagline">Making digital spaces safer</p>
+          </div>
+        </header>
+
+        <div class="intro">
+          <h1 id="page-title">Check a message with care</h1>
+          <p>Analyze a message for potentially harmful content.</p>
+        </div>
+
+        <div class="prototype-note" role="note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.75a9.25 9.25 0 1 0 0 18.5 9.25 9.25 0 0 0 0-18.5Zm0 1.75a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15Zm-.9 3.25v5.25h1.8V7.75h-1.8Zm0 6.85v1.8h1.8v-1.8h-1.8Z" /></svg>
+          <p>This is a demonstration only. No messages are saved or sent anywhere.</p>
+        </div>
+
+        <div id="empty-state" class="state-message" aria-live="polite">
+          <span class="state-dot" aria-hidden="true"></span>
+          <p>Enter a message below to begin a mock analysis.</p>
+        </div>
+
+        <form id="analysis-form" novalidate>
+          <label for="message-input">Message to analyze</label>
+          <textarea id="message-input" name="message" maxlength="1000" rows="8" placeholder="Paste or type a message here…" aria-describedby="input-support"></textarea>
+          <div id="input-support" class="input-meta">
+            <span>Up to 1,000 characters</span>
+            <span id="character-count" aria-live="polite">0 / 1,000</span>
+          </div>
+          <button id="analyze-button" class="button button-primary" type="submit" disabled>
+            Analyze message
+          </button>
+        </form>
+
+        <section id="loading-state" class="feedback-card loading-card" hidden aria-live="polite" aria-busy="true">
+          <span class="spinner" aria-hidden="true"></span>
+          <div><h2>Analyzing…</h2><p>Reviewing the message with sample prototype data.</p></div>
+        </section>
+
+        <section id="result-state" class="feedback-card result-card" hidden aria-live="polite" aria-labelledby="result-heading">
+          <div class="result-heading">
+            <span id="result-icon" class="result-icon" aria-hidden="true"></span>
+            <div><p class="eyebrow">Analysis result</p><h2 id="result-heading"></h2></div>
+          </div>
+          <dl class="result-details">
+            <div><dt>Category</dt><dd id="result-category"></dd></div>
+            <div><dt>Severity</dt><dd id="result-severity"></dd></div>
+            <div><dt>Confidence</dt><dd id="result-confidence"></dd></div>
+          </dl>
+          <div class="explanation"><h3>What this means</h3><p id="result-explanation"></p></div>
+          <button id="analyze-another" class="button button-secondary" type="button">Analyze another message</button>
+        </section>
+
+        <section id="error-state" class="feedback-card error-card" hidden role="alert" aria-labelledby="error-heading">
+          <div class="result-heading"><span class="result-icon" aria-hidden="true">!</span><div><p class="eyebrow">Analysis unavailable</p><h2 id="error-heading">Something went wrong.</h2></div></div>
+          <p>Please try again.</p>
+          <button id="try-again" class="button button-secondary" type="button">Try again</button>
+        </section>
+      </section>
+      <footer>ChildGuard MVP · Mock analysis only</footer>
+    </main>
+    <script src="js/app.js"></script>
+  </body>
+</html>
