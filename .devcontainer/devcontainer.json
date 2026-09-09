@@ -1,0 +1,27 @@
+{
+  "name": "ChildGuard",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11-bookworm",
+  
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "FastAPI (ChildGuard)",
+      "onAutoForward": "notify"
+    }
+  },
+  
+  "postCreateCommand": "pip install -r requirements.txt && python -m scripts.train_model",
+  
+  "postStartCommand": "bash .devcontainer/start-server.sh",
+  "postAttachCommand": "bash .devcontainer/start-server.sh",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.debugpy"
+      ]
+    }
+  }
+}

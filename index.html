@@ -45,6 +45,11 @@
             <span>Up to 1,000 characters</span>
             <span id="character-count" aria-live="polite">0 / 1,000</span>
           </div>
+          <div class="upload-row">
+            <label class="button button-secondary upload-button" for="file-input">Upload a text file</label>
+            <input id="file-input" type="file" accept=".txt,text/plain" hidden />
+            <span id="upload-status" class="upload-status" aria-live="polite"></span>
+          </div>
           <button id="analyze-button" class="button button-primary" type="submit" disabled>
             Analyze message
           </button>
@@ -52,7 +57,7 @@
 
         <section id="loading-state" class="feedback-card loading-card" hidden aria-live="polite" aria-busy="true">
           <span class="spinner" aria-hidden="true"></span>
-          <div><h2>Analyzing…</h2><p>Reviewing the message with sample prototype data.</p></div>
+          <div><h2>Analyzing…</h2><p>Reviewing the message with the ChildGuard NLP model.</p></div>
         </section>
 
         <section id="result-state" class="feedback-card result-card" hidden aria-live="polite" aria-labelledby="result-heading">
@@ -60,9 +65,10 @@
             <span id="result-icon" class="result-icon" aria-hidden="true"></span>
             <div><p class="eyebrow">Analysis result</p><h2 id="result-heading"></h2></div>
           </div>
+          <p id="result-language" class="language-tag" aria-label="Detected language"></p>
           <dl class="result-details">
-            <div><dt>Category</dt><dd id="result-category"></dd></div>
-            <div><dt>Severity</dt><dd id="result-severity"></dd></div>
+            <div><dt>Categories</dt><dd id="result-categories" class="category-tags"></dd></div>
+            <div><dt>Severity</dt><dd id="result-severity" class="severity-badge"></dd></div>
             <div><dt>Confidence</dt><dd id="result-confidence"></dd></div>
           </dl>
           <div class="explanation"><h3>What this means</h3><p id="result-explanation"></p></div>
@@ -71,11 +77,11 @@
 
         <section id="error-state" class="feedback-card error-card" hidden role="alert" aria-labelledby="error-heading">
           <div class="result-heading"><span class="result-icon" aria-hidden="true">!</span><div><p class="eyebrow">Analysis unavailable</p><h2 id="error-heading">Something went wrong.</h2></div></div>
-          <p>Please try again.</p>
+          <p>Unable to reach the analysis service. Please check that the backend is running and try again.</p>
           <button id="try-again" class="button button-secondary" type="button">Try again</button>
         </section>
       </section>
-      <footer>ChildGuard MVP · Mock analysis only</footer>
+      <footer>ChildGuard MVP · Optimized NLP demo</footer>
     </main>
     <script src="js/app.js"></script>
   </body>
